@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApiNetworkRouterInterfaceController;
+use App\Http\Controllers\ApiNetworkRouterLogController;
 use App\Http\Controllers\ApiTokenController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +19,6 @@ use Illuminate\Support\Facades\Auth;
 
 Route::post("/auth", [ApiTokenController::class, 'show']);
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get("/router_log/{router}/index", [ApiNetworkRouterLogController::class, 'index']);
+Route::get("/router_interface/{router}/index", [ApiNetworkRouterInterfaceController::class, 'index']);
+
