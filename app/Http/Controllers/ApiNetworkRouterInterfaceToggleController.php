@@ -15,43 +15,25 @@ class ApiNetworkRouterInterfaceToggleController extends Controller
             'pass' => $router->admin_password,
         ]);
 
-        // $networkInterfaceIsDisabled = collect($client->query(
-        //     (new RouterOSQuery("/interface/print"))
-        //         ->where('.id', $id)
-        // )
-        // ->read())
-        // ->first()
-        // ["disabled"] ?? true;
+        $networkInterface = collect($client->query(
+            (new RouterOSQuery("/interface/print"))
+                ->where('.id', $id)
+        )
+        ->read())
+        ->first();
+
+        $toggleType = $networkInterface["disabled"] === "true" ?
+            "enable" :
+            "disable";
 
         $response = $client->query(
-            (new RouterOSQuery("/interface/set"))
-                ->equal("disabled", "yes")
-                ->where("name", "ether4")
-        )
+            (new RouterOSQuery("/interface/{$toggleType}"))
+                ->equal("numbers", $networkInterface["name"])
+        )->read();
 
-        ->read(false);
-
-        // $response = collect($client->query(
-        //     (new RouterOSQuery("/interface/print"))
-        //         ->where('.id', $id)
-        // )
-        // ->read())
-        // ->first();
-
-        return $response;
-
-        // return $networkInterfaceIsDisabled;
-
-        // $networkInterfaces = collect($response)
-        //     ->map(function ($networkInterface) {
-        //         return collect($networkInterface)->mapWithKeys(function ($value, $key) {
-        //             return [
-        //                 Formatter::cleanKey($key) =>
-        //                 $value
-        //             ];
-        //         });
-        //     });
-
-        // return $networkInterfaces;
+        $response = $client->query(
+            (new RouterOSQuery("/interface/print"))
+                ->where('.id', $id)
+        )->read();
     }
 }
