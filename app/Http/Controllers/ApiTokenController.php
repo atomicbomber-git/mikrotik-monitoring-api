@@ -44,10 +44,10 @@ class ApiTokenController extends Controller
             ];
         }
 
-        $token = Str::random(80);
+        $token = Str::random(60);
 
         Auth::guard()->user()->update([
-            "api_token" => Hash::make($token)
+            "api_token" => hash('sha256', $token)
         ]);
 
         return [
