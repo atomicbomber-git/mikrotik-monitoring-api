@@ -35,5 +35,7 @@ class ApiNetworkRouterInterfaceToggleController extends Controller
             (new RouterOSQuery("/interface/print"))
                 ->where('.id', $id)
         )->read();
+
+        return $response;
     }
 }

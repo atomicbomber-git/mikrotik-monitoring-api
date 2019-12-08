@@ -4,6 +4,7 @@ use App\Http\Controllers\ApiNetworkRouterInterfaceController;
 use App\Http\Controllers\ApiNetworkRouterInterfaceToggleController;
 use App\Http\Controllers\ApiNetworkRouterLogController;
 use App\Http\Controllers\ApiTokenController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
