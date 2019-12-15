@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Formatter;
 use App\NetworkRouter;
-
 use RouterOS\Client as RouterOSClient;
 use RouterOS\Query as RouterOSQuery;
 

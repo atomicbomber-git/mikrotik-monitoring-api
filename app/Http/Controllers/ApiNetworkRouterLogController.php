@@ -4,28 +4,19 @@ namespace App\Http\Controllers;
 
 use App\NetworkRouter;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
-use PEAR2\Net\RouterOS\Util as RouterOSUtil;
-use PEAR2\Net\RouterOS\Client as RouterOSClient;
+use RouterOS\Client as RouterOSClient;
+use RouterOS\Query as RouterOSQuery;
 
 class ApiNetworkRouterLogController extends Controller
 {
     public function index(NetworkRouter $router)
     {
         try {
-            $routerUtil = new RouterOSUtil(new RouterOSClient(
-                $router->ipv4_address,
-                $router->admin_username,
-                $router->admin_password,
-            ));
-
-            $logEntries = new Collection();
-
-            foreach ($routerUtil->setMenu('/log')->getAll() as $entry) {
-                $logEntries->push($entry('time') . ' ' . $entry('topics') . ' ' . $entry('message') . "\n");
-            }
-
-            return $logEntries;
+            $client = new RouterOSClient([
+                'host' => $router->ipv4_address,
+                'user' => $router->admin_username,
+                'pass' => $router->admin_password,
+            ]);
         }
         catch (\Exception $e) {
             return $e->getMessage();
