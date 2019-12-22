@@ -28,3 +28,4 @@ Route::get("/router/{router}/wireless/registration_table/index", [ApiNetworkRout
 
 Route::get("/router/{router}/wireless/access_list/index", [ApiNetworkRouterWirelessAccessListController::class, 'index']);
 Route::post("/router/{router}/wireless/access_list/create", [ApiNetworkRouterWirelessAccessListController::class, 'create']);
+Route::post("/router/{router}/wireless/access_list/delete", [ApiNetworkRouterWirelessAccessListController::class, 'delete']);

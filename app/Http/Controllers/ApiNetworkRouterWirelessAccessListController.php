@@ -45,10 +45,15 @@ class ApiNetworkRouterWirelessAccessListController extends Controller
     public function create(Request $request, NetworkRouter $router)
     {
         $routerQueryParameters = $request->validate([
-            "interface" => "required|string",
-            "mac-address" => "required|string",
+            "network_interface" => "required|string",
+            "mac_address" => "required|string",
             "authentication" => "required|in:yes,no",
         ]);
+
+        $routerQueryParameters["interface"] = $routerQueryParameters["network_interface"];
+        $routerQueryParameters["mac-address"] = $routerQueryParameters["mac_address"];
+        unset($routerQueryParameters["network_interface"]);
+        unset($routerQueryParameters["mac_address"]);
 
         try {
             $client = new RouterOSClient([
@@ -67,11 +72,53 @@ class ApiNetworkRouterWirelessAccessListController extends Controller
             }
 
             $response = $client->query($query)->read();
-
-            return $response;
         }
         catch (\Exception $e) {
-            return $e->getMessage();
+            return [
+                "status" => "error"
+            ];
         }
+
+        return [
+            "status" => "success",
+        ];
+    }
+
+    public function delete(Request $request,  NetworkRouter $router)
+    {
+        $validator = $this->getValidationFactory()->make($request->all(), [
+            "id" => "required"
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        $data = $validator->validated();
+
+        try {
+            $client = new RouterOSClient([
+                'host' => $router->ipv4_address,
+                'user' => $router->admin_username,
+                'pass' => $router->admin_password,
+            ]);
+
+            $query = (new RouterOSQuery("/interface/wireless/access-list/remove"))
+                ->equal(".id", $data["id"]);
+
+            $client->query($query)->read();
+        }
+        catch (\Exception $e) {
+            return [
+                "status" => "error",
+                "message" => $e->getMessage(),
+            ];
+        }
+
+
+        return [
+            "status" => "success",
+            "message" => "",
+        ];
     }
 }
