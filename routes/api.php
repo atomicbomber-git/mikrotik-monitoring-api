@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApiNetworkRouterInterfaceController;
 use App\Http\Controllers\ApiNetworkRouterInterfaceToggleController;
 use App\Http\Controllers\ApiNetworkRouterLogController;
+use App\Http\Controllers\ApiNetworkRouterWirelessAccessListController;
 use App\Http\Controllers\ApiNetworkRouterWirelessRegistrationTableController;
 use App\Http\Controllers\ApiTokenController;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,5 @@ Route::get("/router/{router}/interface/index", [ApiNetworkRouterInterfaceControl
 Route::post("/router/{router}/interface/toggle/{id}", [ApiNetworkRouterInterfaceToggleController::class, 'update']);
 Route::get("/router/{router}/wireless/registration_table/index", [ApiNetworkRouterWirelessRegistrationTableController::class, 'index']);
 
+Route::get("/router/{router}/wireless/access_list/index", [ApiNetworkRouterWirelessAccessListController::class, 'index']);
+Route::post("/router/{router}/wireless/access_list/create", [ApiNetworkRouterWirelessAccessListController::class, 'create']);
