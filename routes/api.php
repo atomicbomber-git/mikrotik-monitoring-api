@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\ApiNetworkRouterInterfaceController;
-use App\Http\Controllers\ApiNetworkRouterInterfaceToggleController;
-use App\Http\Controllers\ApiNetworkRouterLogController;
-use App\Http\Controllers\ApiNetworkRouterWirelessAccessListController;
-use App\Http\Controllers\ApiNetworkRouterWirelessRegistrationTableController;
+use App\Http\Controllers\NetworkInterfaceController;
+use App\Http\Controllers\NetworkInterfaceToggleController;
+use App\Http\Controllers\LogController;
+use App\Http\Controllers\AccessListController;
+use App\Http\Controllers\RegistrationTableController;
 use App\Http\Controllers\ApiTokenController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,11 +21,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/auth", [ApiTokenController::class, 'show']);
 
-Route::get("/router/{router}/log/index", [ApiNetworkRouterLogController::class, 'index']);
-Route::get("/router/{router}/interface/index", [ApiNetworkRouterInterfaceController::class, 'index']);
-Route::post("/router/{router}/interface/toggle/{id}", [ApiNetworkRouterInterfaceToggleController::class, 'update']);
-Route::get("/router/{router}/wireless/registration_table/index", [ApiNetworkRouterWirelessRegistrationTableController::class, 'index']);
+Route::get("/router/{router}/log/index", [LogController::class, 'index']);
+Route::get("/router/{router}/interface/index", [NetworkInterfaceController::class, 'index']);
+Route::post("/router/{router}/interface/toggle/{id}", [NetworkInterfaceToggleController::class, 'update']);
+Route::get("/router/{router}/wireless/registration_table/index", [RegistrationTableController::class, 'index']);
 
-Route::get("/router/{router}/wireless/access_list/index", [ApiNetworkRouterWirelessAccessListController::class, 'index']);
-Route::post("/router/{router}/wireless/access_list/create", [ApiNetworkRouterWirelessAccessListController::class, 'create']);
-Route::post("/router/{router}/wireless/access_list/delete", [ApiNetworkRouterWirelessAccessListController::class, 'delete']);
+Route::get("/router/{router}/wireless/access_list/index", [AccessListController::class, 'index']);
+Route::post("/router/{router}/wireless/access_list/create", [AccessListController::class, 'create']);
+Route::post("/router/{router}/wireless/access_list/delete", [AccessListController::class, 'delete']);
