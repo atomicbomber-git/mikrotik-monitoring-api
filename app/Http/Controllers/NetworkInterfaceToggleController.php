@@ -19,8 +19,8 @@ class NetworkInterfaceToggleController extends Controller
             (new RouterOSQuery("/interface/print"))
                 ->where('.id', $id)
         )
-        ->read())
-        ->first();
+            ->read())
+            ->first();
 
         $toggleType = $networkInterface["disabled"] === "true" ?
             "enable" :
@@ -36,6 +36,8 @@ class NetworkInterfaceToggleController extends Controller
                 ->where('.id', $id)
         )->read();
 
-        return $response;
+        dump($response[0] ?? null);
+
+        return $response[0] ?? null;
     }
 }

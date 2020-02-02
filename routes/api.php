@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post("/auth", [ApiTokenController::class, 'show']);
+Route::post("/login", [ApiTokenController::class, 'show']);
 
 Route::get("/router/{router}/log/index", [LogController::class, 'index']);
 Route::get("/router/{router}/interface/index", [NetworkInterfaceController::class, 'index']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -22,11 +23,10 @@ class ApiTokenController extends Controller
         $errorBag = new MessageBag();
 
         if ($validator->fails()) {
-            $errorBag = $errorBag->merge($validator->errors());
-
-            return [
-                "errors" => $errorBag
-            ];
+            return response()
+                ->json([
+                    "errors" => $validator->errors()
+                ], 422);
         }
 
         $data = $validator->validated();
@@ -37,21 +37,21 @@ class ApiTokenController extends Controller
         ]);
 
         if (!$authIsSuccess) {
-            $errorBag->add("username", trans("auth.failed"));
-
-            return [
-                "errors" => $errorBag
-            ];
+            return response()
+                ->json([
+                    "errors" => $errorBag->add("username", trans("auth.failed"))
+                ], 403);
         }
 
+        /** @var User $user */
+        $user = Auth::guard()->user();
         $token = Str::random(60);
-
-        Auth::guard()->user()->update([
-            "api_token" => hash('sha256', $token)
-        ]);
+        $user->update(["api_token" => hash('sha256', $token)]);
 
         return [
-            "token" => $token
+            "token" => $token,
+            "username" => $user->username,
+            "name" => $user->name,
         ];
     }
 }
