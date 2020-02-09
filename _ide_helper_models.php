@@ -17,7 +17,7 @@ namespace App{
  * @property int $id
  * @property int $user_id
  * @property string $name
- * @property string $ipv4_address
+ * @property string $host
  * @property string $admin_username
  * @property string $admin_password
  * @property int $is_primary
@@ -29,8 +29,8 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereAdminPassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereAdminUsername($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereHost($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereIpv4Address($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereIsPrimary($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereUpdatedAt($value)

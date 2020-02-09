@@ -4,6 +4,7 @@ use App\Http\Controllers\NetworkInterfaceController;
 use App\Http\Controllers\NetworkInterfaceToggleController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\AccessListController;
+use App\Http\Controllers\NetworkRouterController;
 use App\Http\Controllers\RegistrationTableController;
 use App\Http\Controllers\ApiTokenController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post("/login", [ApiTokenController::class, 'show']);
+
+Route::resource("/router", class_basename(NetworkRouterController::class))
+    ->only(["index"]);
 
 Route::get("/router/{router}/log/index", [LogController::class, 'index']);
 Route::get("/router/{router}/interface/index", [NetworkInterfaceController::class, 'index']);

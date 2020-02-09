@@ -21,7 +21,7 @@ class NetworkRouterStatusController extends Controller
 
             try {
                 new RouterOSClient([
-                    'host' => $network_router->ipv4_address,
+                    'host' => $network_router->host,
                     'user' => $network_router->admin_username,
                     'pass' => $network_router->admin_password,
                 ]);
