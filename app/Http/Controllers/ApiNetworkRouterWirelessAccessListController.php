@@ -16,7 +16,7 @@ class ApiNetworkRouterWirelessAccessListController extends Controller
 
         try {
             $client = new RouterOSClient([
-                'host' => $router->ipv4_address,
+                'host' => $router->host,
                 'user' => $router->admin_username,
                 'pass' => $router->admin_password,
             ]);
@@ -57,7 +57,7 @@ class ApiNetworkRouterWirelessAccessListController extends Controller
 
         try {
             $client = new RouterOSClient([
-                'host' => $router->ipv4_address,
+                'host' => $router->host,
                 'user' => $router->admin_username,
                 'pass' => $router->admin_password,
             ]);
@@ -98,7 +98,7 @@ class ApiNetworkRouterWirelessAccessListController extends Controller
 
         try {
             $client = new RouterOSClient([
-                'host' => $router->ipv4_address,
+                'host' => $router->host,
                 'user' => $router->admin_username,
                 'pass' => $router->admin_password,
             ]);
