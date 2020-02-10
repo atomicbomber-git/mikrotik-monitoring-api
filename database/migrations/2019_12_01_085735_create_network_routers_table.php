@@ -14,9 +14,9 @@ class CreateNetworkRoutersTable extends Migration
     public function up()
     {
         Schema::create('network_routers', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
 
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('user_id');
             $table->string("name");
             $table->string("ipv4_address");
             $table->string("admin_username");

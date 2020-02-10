@@ -76,3 +76,24 @@ namespace App{
 	class User extends \Eloquent {}
 }
 
+namespace App{
+/**
+ * App\UserLog
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $text
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereUserId($value)
+ */
+	class UserLog extends \Eloquent {}
+}
+
