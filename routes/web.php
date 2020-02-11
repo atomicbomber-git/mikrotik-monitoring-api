@@ -12,9 +12,12 @@
 */
 
 use App\Http\Controllers\NetworkRouterStatusController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
 Route::get("/", [NetworkRouterStatusController::class, "index"])->name("network-router-status.index");
+
+Route::resource("user", class_basename(UserController::class));

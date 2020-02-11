@@ -43,7 +43,7 @@ class ApiTokenController extends Controller
                 ], 403);
         }
 
-        /** @var User $user */
+        /** @var UserController $user */
         $user = Auth::guard()->user();
         $token = Str::random(60);
         $user->update(["api_token" => hash('sha256', $token)]);

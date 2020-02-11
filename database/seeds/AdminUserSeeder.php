@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminUserSeeder extends Seeder
 {
-    const USERS = [
+    const SUPER_ADMINS = [
+        "superadmin",
+    ];
+
+    const ROUTER_ADMINS = [
       "administrator",
       "administrator2",
       "administrator3",
@@ -21,7 +25,17 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
-        foreach (static::USERS as $username) {
+        foreach (static::SUPER_ADMINS as $username) {
+            User::create([
+                "name" => "Administrator",
+                "username" => "{$username}",
+                "level" => UserLevel::SUPER_ADMINISTRATOR,
+                "email" => "{$username}@superadmin.com",
+                "password" => Hash::make("{$username}"),
+            ]);
+        }
+
+        foreach (static::ROUTER_ADMINS as $username) {
             User::create([
                 "name" => "Administrator",
                 "username" => "{$username}",
