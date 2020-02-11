@@ -18,7 +18,7 @@
 
             <dl>
                 <dt> Alamat IP </dt>
-                <dd> {{ $network_router->ipv4_address }} </dd>
+                <dd> {{ $network_router->host }} </dd>
 
                 <dt> Status </dt>
                 <dd>
