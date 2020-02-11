@@ -7,6 +7,7 @@ use App\Http\Controllers\AccessListController;
 use App\Http\Controllers\NetworkRouterController;
 use App\Http\Controllers\RegistrationTableController;
 use App\Http\Controllers\ApiTokenController;
+use App\Http\Controllers\UserLogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/login", [ApiTokenController::class, 'show']);
 
-Route::resource("/router", class_basename(NetworkRouterController::class))
-    ->only(["index"]);
+Route::resource("/router", class_basename(NetworkRouterController::class))->only(["index"]);
+Route::resource("/user_log", class_basename(UserLogController::class))->only(["index", "create"]);
 
 Route::get("/router/{router}/log/index", [LogController::class, 'index']);
 Route::get("/router/{router}/interface/index", [NetworkInterfaceController::class, 'index']);

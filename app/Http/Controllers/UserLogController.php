@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserLogResource;
 use App\UserLog;
 use Illuminate\Http\Request;
 
@@ -14,23 +15,17 @@ class UserLogController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $userLogs = UserLog::query()
+            ->with("user")
+            ->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return UserLogResource::collection($userLogs);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +36,7 @@ class UserLogController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\UserLog  $userLog
+     * @param \App\UserLog $userLog
      * @return \Illuminate\Http\Response
      */
     public function show(UserLog $userLog)
@@ -50,21 +45,10 @@ class UserLogController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\UserLog  $userLog
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UserLog $userLog)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserLog  $userLog
+     * @param \Illuminate\Http\Request $request
+     * @param \App\UserLog $userLog
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, UserLog $userLog)
@@ -75,7 +59,7 @@ class UserLogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UserLog  $userLog
+     * @param \App\UserLog $userLog
      * @return \Illuminate\Http\Response
      */
     public function destroy(UserLog $userLog)
