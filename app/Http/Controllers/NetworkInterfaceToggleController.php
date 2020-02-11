@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\NetworkInterfaceResource;
 use App\NetworkRouter;
-use App\UserLog;
-use Illuminate\Http\Request;
 use RouterOS\Client as RouterOSClient;
 use RouterOS\Query as RouterOSQuery;
 
