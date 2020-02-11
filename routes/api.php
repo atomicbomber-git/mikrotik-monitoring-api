@@ -22,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/login", [ApiTokenController::class, 'show']);
 
-Route::resource("/router", class_basename(NetworkRouterController::class))
-    ->only(["index"]);
-
+Route::resource("/router", class_basename(NetworkRouterController::class));
 Route::get("/router/{router}/log/index", [LogController::class, 'index']);
 Route::get("/router/{router}/interface/index", [NetworkInterfaceController::class, 'index']);
 Route::post("/router/{router}/interface/toggle/{id}", [NetworkInterfaceToggleController::class, 'update']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\NetworkRouterResource;
 use App\NetworkRouter;
 use Illuminate\Http\Request;
 
@@ -35,23 +36,35 @@ class NetworkRouterController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return NetworkRouterResource
      */
-    public function show($id)
+    public function show(NetworkRouter $router)
     {
-        //
+        return new NetworkRouterResource($router);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return NetworkRouterResource
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, NetworkRouter $router)
     {
-        //
+        $data = $this->validate($request, [
+            "name" => "string|required",
+            "host" => "string|required",
+            "admin_username" => "string|required",
+            "admin_password" => "nullable|string",
+        ]);
+
+        if ($data["admin_password"] === null) {
+            $data["admin_password"] = "";
+        }
+
+        return new NetworkRouterResource(tap($router)->update($data));
     }
 
     /**

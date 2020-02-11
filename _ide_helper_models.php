@@ -12,35 +12,6 @@
 
 namespace App{
 /**
- * App\NetworkRouter
- *
- * @property int $id
- * @property int $user_id
- * @property string $name
- * @property string $host
- * @property string $admin_username
- * @property string $admin_password
- * @property int $is_primary
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereAdminPassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereAdminUsername($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereHost($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereIsPrimary($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereUserId($value)
- */
-	class NetworkRouter extends \Eloquent {}
-}
-
-namespace App{
-/**
  * App\User
  *
  * @property int $id
@@ -74,5 +45,34 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUsername($value)
  */
 	class User extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\NetworkRouter
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $name
+ * @property string $host
+ * @property string $admin_username
+ * @property string $admin_password
+ * @property int $is_primary
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereAdminPassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereAdminUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereHost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereIsPrimary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereUserId($value)
+ */
+	class NetworkRouter extends \Eloquent {}
 }
 
