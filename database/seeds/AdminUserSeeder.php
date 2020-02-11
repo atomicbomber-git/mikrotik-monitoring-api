@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminUserSeeder extends Seeder
 {
+    const USERS = [
+      "administrator",
+      "administrator2",
+      "administrator3",
+      "administrator4",
+    ];
+
     /**
      * Run the database seeds.
      *
@@ -14,12 +21,14 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            "name" => "Administrator",
-            "username" => "administrator",
-            "level" => UserLevel::ADMINISTRATOR,
-            "email" => "administrator@admin.com",
-            "password" => Hash::make("administrator"),
-        ]);
+        foreach (static::USERS as $username) {
+            User::create([
+                "name" => "Administrator",
+                "username" => "{$username}",
+                "level" => UserLevel::ADMINISTRATOR,
+                "email" => "{$username}@admin.com",
+                "password" => Hash::make("{$username}"),
+            ]);
+        }
     }
 }

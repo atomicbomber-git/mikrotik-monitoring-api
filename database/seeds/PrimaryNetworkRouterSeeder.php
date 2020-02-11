@@ -20,7 +20,7 @@ class PrimaryNetworkRouterSeeder extends Seeder
         $adminUser->network_routers()
             ->create([
                 "name" => "Router Utama",
-                "ipv4_address" => "192.168.88.1",
+                "host" => "192.168.88.1",
                 "is_primary" => 1,
                 "admin_username" => "admin",
                 "admin_password" => "",
