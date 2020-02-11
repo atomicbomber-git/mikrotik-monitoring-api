@@ -1,11 +1,28 @@
 @extends('layouts.app')
-@section('title', 'Status Router')
+@section('title', 'Manajemen User')
 @section('content')
     <div class="container my-5">
+        <nav class="breadcrumb mb-5">
+            <a class="breadcrumb-item" href="{{ route("user.index") }}">
+                {{ config("app.name") }}
+            </a>
+            <a class="breadcrumb-item active">
+                Manajemen User
+            </a>
+        </nav>
+
         <h1 class='mb-5'>
             <i class="fa fa-users" aria-hidden="true"></i>
             Manajemen User
         </h1>
+
+        <div class="d-flex justify-content-end my-4">
+            <a class="btn btn-outline-dark" href="{{ route("user.create") }}">
+                Tambah User
+                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+            </a>
+        </div>
+
 
         @include('layouts.messages')
 

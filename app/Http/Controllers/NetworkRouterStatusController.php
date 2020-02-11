@@ -9,6 +9,11 @@ use RouterOS\Client as RouterOSClient;
 
 class NetworkRouterStatusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("auth");
+    }
+
     public function index(Request $request)
     {
         $network_routers = NetworkRouter::query()

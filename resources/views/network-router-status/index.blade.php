@@ -2,6 +2,15 @@
 @section('title', 'Status Router')
 @section('content')
 <div class="container my-5">
+    <nav class="breadcrumb mb-5">
+        <a class="breadcrumb-item" href="{{ route("user.index") }}">
+            {{ config("app.name") }}
+        </a>
+        <a class="breadcrumb-item active">
+            Status Router
+        </a>
+    </nav>
+
     <h1 class='mb-5'>
         <i class='fa fa-list-alt'></i>
         Status Router

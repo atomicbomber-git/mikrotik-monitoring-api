@@ -6,6 +6,7 @@ use App\Constants\UserLevel;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -46,24 +47,43 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return response()->view("user.create");
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->validate($request, [
+            "username" => "required|string|unique:users",
+            "name" => "required|string",
+            "password" => "nullable|string",
+        ]);
+
+        User::create(array_merge($data, [
+            "password" => Hash::make($data["password"]),
+            "level" => UserLevel::ADMINISTRATOR,
+        ]));
+
+        return redirect()
+            ->route("user.index")
+            ->with("messages", [
+                [
+                    "state" => "success",
+                    "content" => "Data berhasil ditambahkan."
+                ]
+            ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -74,30 +94,52 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        //
+        return response()->view("user.edit", compact("user"));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param \App\User $user
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, User $user)
     {
-        //
+        $data = $this->validate($request, [
+            "username" => "required|string|unique:users,username,{$user->id}",
+            "name" => "required|string",
+            "password" => "nullable|string",
+        ]);
+
+        if ($data["password"] === null) {
+            unset($data["password"]);
+        } else {
+            $data["password"] = Hash::make($data["password"]);
+        }
+
+        $user->forceFill($data);
+
+        return redirect()
+            ->route("user.edit", $user)
+            ->with("messages", [
+                [
+                    "state" => "success",
+                    "content" => "Data berhasil diubah"
+                ]
+            ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function destroy(User $user)
