@@ -3,34 +3,48 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Formatter;
+use App\Http\Resources\NetworkInterfaceResource;
 use App\NetworkRouter;
+use Illuminate\Http\Request;
 use RouterOS\Client as RouterOSClient;
 use RouterOS\Query as RouterOSQuery;
 
 class NetworkInterfaceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware([
+            "auth:api"
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param NetworkRouter $router
+     * @return \Illuminate\Http\Response
+     */
     public function index(NetworkRouter $router)
     {
-        $client = new RouterOSClient([
-            'host' => $router->host,
-            'user' => $router->admin_username,
-            'pass' => $router->admin_password,
-        ]);
+        try {
+            $client = new RouterOSClient([
+                'host' => $router->host,
+                'user' => $router->admin_username,
+                'pass' => $router->admin_password,
+            ]);
 
-        $response = $client->query(
-            (new RouterOSQuery("/interface/print"))
-        )->read();
+            $response = $client->query(
+                (new RouterOSQuery("/interface/print"))
+            )->read();
 
-        $networkInterfaces = collect($response)
-            ->map(function ($networkInterface) {
-                return collect($networkInterface)->mapWithKeys(function ($value, $key) {
-                    return [
-                        Formatter::cleanKey($key) =>
-                        $value
-                    ];
-                });
-            });
+            $networkInterfaces = NetworkInterfaceResource::collection($response);
+        }
+        catch (\Exception $exception) {
+            return response([
+                "message" => "Failed to connect to router",
+                "errors" => ["Failed to connect."],
+            ]);
+        }
 
-        return $networkInterfaces;
+        return response($networkInterfaces);
     }
 }

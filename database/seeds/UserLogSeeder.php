@@ -17,12 +17,17 @@ class UserLogSeeder extends Seeder
         DB::transaction(function () {
             $users = User::query()->select("id")->get();
 
-            foreach ($users as $user) {
-                factory(UserLog::class, 30)
-                    ->create([
-                        "user_id" => $user->id
-                    ]);
-            }
+            factory(UserLog::class, 30)
+                ->make()
+                ->each(function (UserLog $userLog) use($users) {
+                    $fakeTime = now()->subSeconds(rand(-3600, -7200));
+
+                    $userLog->forceFill([
+                        "user_id" => $users->random()->id,
+                        "created_at" => $fakeTime,
+                        "updated_at" => $fakeTime,
+                    ])->save();
+                });
         });
     }
 }

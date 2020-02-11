@@ -12,6 +12,28 @@
 
 namespace App{
 /**
+ * App\UserLog
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $text
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereUserId($value)
+ */
+	class UserLog extends \Eloquent {}
+}
+
+namespace App{
+/**
  * App\User
  *
  * @property int $id
@@ -49,22 +71,30 @@ namespace App{
 
 namespace App{
 /**
- * App\UserLog
+ * App\NetworkRouter
  *
  * @property int $id
  * @property int $user_id
- * @property string $text
+ * @property string $name
+ * @property string $host
+ * @property string $admin_username
+ * @property string $admin_password
+ * @property int $is_primary
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereText($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\UserLog whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereAdminPassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereAdminUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereHost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereIsPrimary($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\NetworkRouter whereUserId($value)
  */
-	class UserLog extends \Eloquent {}
+	class NetworkRouter extends \Eloquent {}
 }
 

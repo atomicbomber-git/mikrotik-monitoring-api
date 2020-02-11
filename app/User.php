@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(NetworkRouter::class);
     }
+
+    public function user_logs()
+    {
+        return $this->hasMany(UserLog::class);
+    }
 }

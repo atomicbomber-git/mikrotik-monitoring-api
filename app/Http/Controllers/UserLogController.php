@@ -16,6 +16,7 @@ class UserLogController extends Controller
     public function index()
     {
         $userLogs = UserLog::query()
+            ->orderByDesc("created_at")
             ->with("user")
             ->get();
 
