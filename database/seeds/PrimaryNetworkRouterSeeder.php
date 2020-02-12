@@ -21,7 +21,6 @@ class PrimaryNetworkRouterSeeder extends Seeder
             ->create([
                 "name" => "Router Utama",
                 "host" => "192.168.88.1",
-                "is_primary" => 1,
                 "admin_username" => "admin",
                 "admin_password" => "",
             ]);
