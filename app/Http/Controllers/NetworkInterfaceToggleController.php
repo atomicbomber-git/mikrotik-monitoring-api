@@ -59,7 +59,7 @@ class NetworkInterfaceToggleController extends Controller
         $interfaceData = $response[0];
 
         request()->user()->user_logs()->create([
-            "text" => ($toggleType  !== "enable" ? "Mengaktifkan" : "Menonaktifkan") .
+            "text" => ($toggleType  == "enable" ? "Mengaktifkan" : "Menonaktifkan") .
                 " interface {$interfaceData['name']}"
         ]);
 
