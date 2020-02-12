@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 use RouterOS\Client as RouterOSClient;
 use RouterOS\Query as RouterOSQuery;
 
+// Menghubungi router untuk mengambil daftar network interface seperti
+// ether1, ether2, ..., dan wlan
+
+
 class NetworkInterfaceController extends Controller
 {
     public function __construct()

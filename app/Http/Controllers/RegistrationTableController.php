@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 use RouterOS\Client as RouterOSClient;
 use RouterOS\Query as RouterOSQuery;
 
+/**
+ * Menghubungi router untuk mengambil data registration table yang berisi daftar device yang terhubung ke
+ * jaringan wireless pada router.
+ */
+
+
 class RegistrationTableController extends Controller
 {
     public function index(Request $request, NetworkRouter $router)

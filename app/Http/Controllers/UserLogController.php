@@ -6,6 +6,10 @@ use App\Http\Resources\UserLogResource;
 use App\UserLog;
 use Illuminate\Http\Request;
 
+/**
+ * Menyajikan data log user yang terdapat pada database
+ */
+
 class UserLogController extends Controller
 {
     /**

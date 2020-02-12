@@ -7,6 +7,10 @@ use App\NetworkRouter;
 use RouterOS\Client as RouterOSClient;
 use RouterOS\Query as RouterOSQuery;
 
+/**
+ * Menghubungi router untuk mengaktifkan / menonaktifkan network interface
+ */
+
 class NetworkInterfaceToggleController extends Controller
 {
     public function __construct()

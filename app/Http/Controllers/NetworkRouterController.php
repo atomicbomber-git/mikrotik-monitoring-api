@@ -6,6 +6,11 @@ use App\Http\Resources\NetworkRouterResource;
 use App\NetworkRouter;
 use Illuminate\Http\Request;
 
+/**
+ * Menyajikan / memberikan akses utk mengubah data router yang terdaftar di database
+ */
+
+
 class NetworkRouterController extends Controller
 {
     /**

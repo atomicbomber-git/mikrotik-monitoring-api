@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 
+/**
+ * Fasilitas login; Bertugas menerima username dan password, memverifikasi identitas user dgn data tsb, dan
+ * mengembalikan token ke aplikasi jika identitas user benar
+ */
+
 class ApiTokenController extends Controller
 {
     public function show(Request $request, Response $response)

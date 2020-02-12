@@ -7,6 +7,10 @@ use App\NetworkRouter;
 use RouterOS\Client as RouterOSClient;
 use RouterOS\Query as RouterOSQuery;
 
+/**
+ * Menghubungi router untuk memperoleh data log router tersebut
+ */
+
 class LogController extends Controller
 {
     public function index(NetworkRouter $router)

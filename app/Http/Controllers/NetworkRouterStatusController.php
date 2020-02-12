@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use RouterOS\Client as RouterOSClient;
 
+/**
+ * Menampilkan status konektivitas router di halaman web
+ */
+
+
 class NetworkRouterStatusController extends Controller
 {
     public function __construct()

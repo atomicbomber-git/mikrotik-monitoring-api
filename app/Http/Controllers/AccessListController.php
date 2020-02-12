@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 use RouterOS\Client as RouterOSClient;
 use RouterOS\Query as RouterOSQuery;
 
+/**
+ * Manajemen access list; Menampilkan daftar item access list yang ada pada router,
+ * dan menyediakan fitur untuk menambah dan menghapus setiap item access list yang ada.
+ */
+
+
 class AccessListController extends Controller
 {
     public function index(NetworkRouter $router)
