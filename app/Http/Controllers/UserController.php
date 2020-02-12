@@ -128,7 +128,7 @@ class UserController extends Controller
             $data["password"] = Hash::make($data["password"]);
         }
 
-        $user->forceFill($data);
+        $user->forceFill($data)->save();
 
         return redirect()
             ->route("user.edit", $user)

@@ -18,5 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get("/", [NetworkRouterStatusController::class, "index"])->name("network-router-status.index");
+Route::fallback(function () {
+    return redirect()->route("user.index");
+});
+
+Route::get("/network-router/status", [NetworkRouterStatusController::class, "index"])->name("network-router-status.index");
 Route::resource("user", class_basename(UserController::class));
