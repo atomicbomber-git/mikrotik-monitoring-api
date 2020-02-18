@@ -1,7 +1,6 @@
 <?php
 
-use App\Constants\UserLevel;
-use App\User;
+use App\NetworkRouter;
 use Illuminate\Database\Seeder;
 
 class PrimaryNetworkRouterSeeder extends Seeder
@@ -13,16 +12,11 @@ class PrimaryNetworkRouterSeeder extends Seeder
      */
     public function run()
     {
-        $adminUser = User::query()
-            ->where("level", UserLevel::ADMINISTRATOR)
-            ->first();
-
-        $adminUser->network_routers()
-            ->create([
-                "name" => "Router Utama",
-                "host" => "192.168.88.1",
-                "admin_username" => "admin",
-                "admin_password" => "",
-            ]);
+        NetworkRouter::create([
+            "name" => "Router Utama",
+            "host" => "192.168.88.1",
+            "admin_username" => "admin",
+            "admin_password" => "",
+        ]);
     }
 }
