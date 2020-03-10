@@ -77,6 +77,10 @@ class AccessListController extends Controller
                 );
             }
 
+            request()->user()->user_logs()->create([
+                "text" => "Mem-ban client dengan MAC address $routerQueryParameters[mac_address]"
+            ]);
+
             $response = $client->query($query)->read();
         }
         catch (\Exception $e) {
@@ -112,7 +116,18 @@ class AccessListController extends Controller
             $query = (new RouterOSQuery("/interface/wireless/access-list/remove"))
                 ->equal(".id", $data["id"]);
 
+            $accessListData = collect($client->query(
+                (new RouterOSQuery("/interface/print"))
+                    ->where('.id', $data["id"])
+            )->read())
+                ->first();
+
+            request()->user()->user_logs()->create([
+                "text" => "Mem-ban client dengan MAC address $accessListData[mac_address]"
+            ]);
+
             $client->query($query)->read();
+
         }
         catch (\Exception $e) {
             return [
@@ -120,7 +135,6 @@ class AccessListController extends Controller
                 "message" => $e->getMessage(),
             ];
         }
-
 
         return [
             "status" => "success",
