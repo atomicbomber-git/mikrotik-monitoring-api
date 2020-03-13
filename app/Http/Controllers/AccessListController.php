@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Formatter;
 use App\NetworkRouter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use RouterOS\Client as RouterOSClient;
 use RouterOS\Query as RouterOSQuery;
 
@@ -16,6 +17,13 @@ use RouterOS\Query as RouterOSQuery;
 
 class AccessListController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware([
+            "auth:api"
+        ]);
+    }
+
     public function index(NetworkRouter $router)
     {
         $access_lists = [];
@@ -77,16 +85,17 @@ class AccessListController extends Controller
                 );
             }
 
-            request()->user()->user_logs()->create([
-                "text" => "Mem-ban client dengan MAC address $routerQueryParameters[mac_address]"
-            ]);
-
             $response = $client->query($query)->read();
         }
         catch (\Exception $e) {
             return [
                 "status" => "error"
             ];
+        }
+        finally {
+            request()->user()->user_logs()->create([
+                "text" => "Mem-ban client dengan MAC address {$routerQueryParameters['mac-address']}"
+            ]);
         }
 
         return [
@@ -122,10 +131,6 @@ class AccessListController extends Controller
             )->read())
                 ->first();
 
-            request()->user()->user_logs()->create([
-                "text" => "Mem-ban client dengan MAC address $accessListData[mac_address]"
-            ]);
-
             $client->query($query)->read();
 
         }
@@ -134,6 +139,11 @@ class AccessListController extends Controller
                 "status" => "error",
                 "message" => $e->getMessage(),
             ];
+        }
+        finally {
+            request()->user()->user_logs()->create([
+                "text" => "Menghapus ban client dengan MAC address {$accessListData['mac-address']}"
+            ]);
         }
 
         return [
