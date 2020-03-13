@@ -126,10 +126,9 @@ class AccessListController extends Controller
                 ->equal(".id", $data["id"]);
 
             $accessListData = collect($client->query(
-                (new RouterOSQuery("/interface/print"))
+                (new RouterOSQuery("/interface/wireless/access-list/print"))
                     ->where('.id', $data["id"])
-            )->read())
-                ->first();
+            )->read())->first();
 
             $client->query($query)->read();
 
