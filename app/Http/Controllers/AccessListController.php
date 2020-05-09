@@ -64,11 +64,6 @@ class AccessListController extends Controller
             "authentication" => "required|in:yes,no",
         ]);
 
-        $routerQueryParameters["interface"] = $routerQueryParameters["network_interface"];
-        $routerQueryParameters["mac-address"] = $routerQueryParameters["mac_address"];
-        unset($routerQueryParameters["network_interface"]);
-        unset($routerQueryParameters["mac_address"]);
-
         try {
             $client = new RouterOSClient([
                 'host' => $router->host,
@@ -76,14 +71,7 @@ class AccessListController extends Controller
                 'pass' => $router->admin_password,
             ]);
 
-            $query = new RouterOSQuery("/interface/wireless/access-list/add");
-
-            foreach ($routerQueryParameters as $routerQueryParameterKey => $routerQueryParameterValue) {
-                $query->equal(
-                    $routerQueryParameterKey,
-                    $routerQueryParameterValue,
-                );
-            }
+            $query = $this->getBanQuery($routerQueryParameters["network_interface"], $routerQueryParameters["mac_address"]);
 
             $response = $client->query($query)->read();
         }
@@ -149,5 +137,19 @@ class AccessListController extends Controller
             "status" => "success",
             "message" => "",
         ];
+    }
+
+    /**
+     * @param $network_interface
+     * @param $mac_address
+     * @return RouterOSQuery
+     * @throws \RouterOS\Exceptions\QueryException
+     */
+    private function getBanQuery($network_interface, $mac_address): RouterOSQuery
+    {
+        $query = (new RouterOSQuery("/interface/wireless/access-list/add"))
+            ->equal("interface", $network_interface)
+            ->equal("mac-address", $mac_address);
+        return $query;
     }
 }
